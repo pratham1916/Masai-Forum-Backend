@@ -10,7 +10,7 @@ userRouter.get("/", auth, (req, res) => {
 })
 
 userRouter.post("/register", async (req, res) => {
-    const { username, email, password, role } = req.body;
+    const { username, email, password } = req.body;
     try {
         const existingUser = await UserModel.findOne({ email: email });
         if (existingUser) {
@@ -22,7 +22,7 @@ userRouter.post("/register", async (req, res) => {
             }
             else {
                 const user = new UserModel({
-                    username, email, password: hash, role
+                    username, email, password: hash
                 })
                 await user.save();
                 res.status(201).json({ msg: "Registration Successfull" });
