@@ -3,8 +3,10 @@ require('dotenv').config();
 const { connection } = require("./config/db");
 const { userRouter } = require("./routes/user.routes");
 const { postRoute } = require("./routes/post.routes");
+const app = express();
 
 const app = express();
+app.use(cors())
 app.use(express.json());
 app.use("/api",userRouter)
 app.use("/api",postRoute)
